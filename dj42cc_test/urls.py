@@ -8,6 +8,7 @@ urlpatterns = patterns('',
     # Examples:
     # url(r'^$', 'dj42cc_test.views.home', name='home'),
     url(r'^', include('dj42cc_test.splash.urls')),
+    url(r'^', include('dj42cc_test.logger.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),

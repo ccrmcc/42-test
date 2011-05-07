@@ -100,6 +100,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'dj42cc_test.logger.middlewares.HttpLogMiddleWare',
 )
 
 ROOT_URLCONF = 'dj42cc_test.urls'
@@ -120,6 +121,7 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
     "dj42cc_test.splash",
+    "dj42cc_test.logger",
 )
 
 # A sample logging configuration. The only tangible logging
