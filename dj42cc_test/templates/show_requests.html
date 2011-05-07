@@ -1,8 +1,14 @@
 {% extends "base.html" %}
+{% block title %}requests{% endblock %}
 {% block content %}
+<h1>First ten request list</h1>
 <ul>
 {% for log in object_list %}
-<li>{{log.data.path}}</li>
+<li>
+<span class="method">{{log.data.method}}</span>
+<span class="path">{{log.data.path}}</span>
+<span class="code">{{log.data.code}}</span>
+</li>
 {% endfor %}
 </ul>
 {% endblock %}
