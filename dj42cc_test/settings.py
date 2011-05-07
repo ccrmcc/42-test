@@ -100,6 +100,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'dj42cc_test.logger.middlewares.HttpLogMiddleWare',
 )
 
 ROOT_URLCONF = 'dj42cc_test.urls'
