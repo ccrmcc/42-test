@@ -20,6 +20,13 @@ class LogWriteTest(TestCase):
     def tearDown(self):
         HttpLogEntry.objects.all().delete()
 
+class LogLinkTest(TestCase):
+    LINK = ['href="/requests"']
+    def test_index_link(self):
+        response = self.client.get('/')
+        self.assertContains(response, self.LINK)
+
+
 class LogWriteTest(TestCase):
     TRIES = 20
     PATHS = [str(uuid4()) for x in range(TRIES)]
@@ -39,6 +46,15 @@ class LogWriteTest(TestCase):
             self.assertEqual(path, log.data.get('path'))
             self.assertEqual("GET", log.data.get("method"))
             self.assertEqual(response.status_code, log.data.get("code"))
+
+
+    def test_logs_view(self):
+        response = self.client.get('/requests')
+
+        for path in self.PATHS[:10]:
+            self.assertContains(response, path)
+
+
 
     def tearDown(self):
         HttpLogEntry.objects.all().delete()
