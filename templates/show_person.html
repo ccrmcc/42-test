@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+
+{# TODO: move out #}
+<style>
+    .person { float: left }
+</style>
+
+{# use form, maby? #}
+<div class="vcard">
+    <div class="person">
+        <div class="first_name">{{person.first_name}}</div>
+        <div class="last_name">{{person.last_name}}</div>
+
+        <div class="birh_date">{{person.birth_date}}</div>
+        <label>bio</label>
+        <div class="bio">{{person.bio}}</div>
+    </div>
+
+    <div class="contacts">
+        errr
+    {% for contact in contacts %}
+    {% endfor %}
+    </div>
+</div>
+
+
+{% endblock %}
