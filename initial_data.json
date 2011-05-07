@@ -1,5 +1,14 @@
 [
  {
+  "pk": 10, 
+  "model": "contenttypes.contenttype", 
+  "fields": {
+   "model": "contact", 
+   "name": "contact", 
+   "app_label": "splash"
+  }
+ }, 
+ {
   "pk": 5, 
   "model": "contenttypes.contenttype", 
   "fields": {
@@ -33,6 +42,15 @@
    "model": "message", 
    "name": "message", 
    "app_label": "auth"
+  }
+ }, 
+ {
+  "pk": 11, 
+  "model": "contenttypes.contenttype", 
+  "fields": {
+   "model": "othercontact", 
+   "name": "other contact", 
+   "app_label": "splash"
   }
  }, 
  {
@@ -89,11 +107,84 @@
   }
  }, 
  {
+  "pk": "48e0e5d1c45e87d01fc8f14eeb0ad9ba", 
+  "model": "sessions.session", 
+  "fields": {
+   "expire_date": "2011-05-21 06:52:02", 
+   "session_data": "YjM0ZjA5MmM4N2I4NWY4MWZhNTkzYWUzNmRkYjM3ODdkN2Q5OWNjYTqAAn1xAShVEl9hdXRoX3Vz\nZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED\nVQ1fYXV0aF91c2VyX2lkcQRLAXUu\n"
+  }
+ }, 
+ {
   "pk": 1, 
   "model": "sites.site", 
   "fields": {
    "domain": "example.com", 
    "name": "example.com"
+  }
+ }, 
+ {
+  "pk": 6, 
+  "model": "admin.logentry", 
+  "fields": {
+   "action_flag": 1, 
+   "action_time": "2011-05-07 06:56:13", 
+   "object_repr": "OtherContact object", 
+   "object_id": "1", 
+   "change_message": "", 
+   "user": 1, 
+   "content_type": 11
+  }
+ }, 
+ {
+  "pk": 5, 
+  "model": "admin.logentry", 
+  "fields": {
+   "action_flag": 2, 
+   "action_time": "2011-05-07 06:55:21", 
+   "object_repr": "Contact object", 
+   "object_id": "2", 
+   "change_message": "Changed value.", 
+   "user": 1, 
+   "content_type": 10
+  }
+ }, 
+ {
+  "pk": 4, 
+  "model": "admin.logentry", 
+  "fields": {
+   "action_flag": 1, 
+   "action_time": "2011-05-07 06:54:45", 
+   "object_repr": "Contact object", 
+   "object_id": "3", 
+   "change_message": "", 
+   "user": 1, 
+   "content_type": 10
+  }
+ }, 
+ {
+  "pk": 3, 
+  "model": "admin.logentry", 
+  "fields": {
+   "action_flag": 1, 
+   "action_time": "2011-05-07 06:54:30", 
+   "object_repr": "Contact object", 
+   "object_id": "2", 
+   "change_message": "", 
+   "user": 1, 
+   "content_type": 10
+  }
+ }, 
+ {
+  "pk": 2, 
+  "model": "admin.logentry", 
+  "fields": {
+   "action_flag": 1, 
+   "action_time": "2011-05-07 06:54:11", 
+   "object_repr": "Contact object", 
+   "object_id": "1", 
+   "change_message": "", 
+   "user": 1, 
+   "content_type": 10
   }
  }, 
  {
@@ -117,6 +208,41 @@
    "bio": "Damn lazy loooong python bastard.\r\n\r\nLiving in Odessa, writing damn code.", 
    "first_name": "Ilya", 
    "last_name": "Petrov"
+  }
+ }, 
+ {
+  "pk": 1, 
+  "model": "splash.contact", 
+  "fields": {
+   "person": 1, 
+   "typ": "skype", 
+   "value": "ilya_muromec"
+  }
+ }, 
+ {
+  "pk": 2, 
+  "model": "splash.contact", 
+  "fields": {
+   "person": 1, 
+   "typ": "jabber", 
+   "value": "ilya.muromec@jabber.ru"
+  }
+ }, 
+ {
+  "pk": 3, 
+  "model": "splash.contact", 
+  "fields": {
+   "person": 1, 
+   "typ": "email", 
+   "value": "ilya.muromec@gmail.com"
+  }
+ }, 
+ {
+  "pk": 1, 
+  "model": "splash.othercontact", 
+  "fields": {
+   "person": 1, 
+   "value": "Btw, you can send my post mail.\r\n\r\nSomewhere in Odessa it would reach me. "
   }
  }, 
  {
@@ -333,6 +459,60 @@
    "codename": "delete_site", 
    "name": "Can delete site", 
    "content_type": 7
+  }
+ }, 
+ {
+  "pk": 28, 
+  "model": "auth.permission", 
+  "fields": {
+   "codename": "add_contact", 
+   "name": "Can add contact", 
+   "content_type": 10
+  }
+ }, 
+ {
+  "pk": 29, 
+  "model": "auth.permission", 
+  "fields": {
+   "codename": "change_contact", 
+   "name": "Can change contact", 
+   "content_type": 10
+  }
+ }, 
+ {
+  "pk": 30, 
+  "model": "auth.permission", 
+  "fields": {
+   "codename": "delete_contact", 
+   "name": "Can delete contact", 
+   "content_type": 10
+  }
+ }, 
+ {
+  "pk": 31, 
+  "model": "auth.permission", 
+  "fields": {
+   "codename": "add_othercontact", 
+   "name": "Can add other contact", 
+   "content_type": 11
+  }
+ }, 
+ {
+  "pk": 32, 
+  "model": "auth.permission", 
+  "fields": {
+   "codename": "change_othercontact", 
+   "name": "Can change other contact", 
+   "content_type": 11
+  }
+ }, 
+ {
+  "pk": 33, 
+  "model": "auth.permission", 
+  "fields": {
+   "codename": "delete_othercontact", 
+   "name": "Can delete other contact", 
+   "content_type": 11
   }
  }, 
  {
