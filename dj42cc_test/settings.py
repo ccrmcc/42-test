@@ -120,6 +120,7 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
     "dj42cc_test.splash",
+    "dj42cc_test.logger",
 )
 
 # A sample logging configuration. The only tangible logging
