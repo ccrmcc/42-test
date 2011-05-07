@@ -2,3 +2,10 @@ Hi, World!
 
 Here is my test project for 42cc. 
 Nothing usefull, just testing my skills.
+
+Requires django.
+
+To deploy use:
+
+virtualenv --no-site-packages .env
+pip install -r requirements.txt

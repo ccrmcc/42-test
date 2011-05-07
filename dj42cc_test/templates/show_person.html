@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block content %}
+
+{# TODO: move out #}
+<style>
+    div { padding-bottom : 10px }
+    .person { float: left; width: 50%}
+</style>
+
+{# use form, maby? #}
+<div class="vcard">
+    <div class="person">
+        <div class="first_name">{{person.first_name}}</div>
+        <div class="last_name">{{person.last_name}}</div>
+
+        <div class="birh_date">{{person.birth_date}}</div>
+        <label>bio</label>:
+        <div class="bio">{{person.bio}}</div>
+    </div>
+
+    <div class="contacts">
+        {% for contact in person.contact_set.all %}
+            <div class="contact contact-{{contact.typ}}">
+                <label>{{contact.typ}}</label>
+                <span class="value">{{contact.value}}</span>
+            </div>
+        {% endfor %}
+
+        {% for contact in person.othercontact_set.all %}
+            <div class="contact contact-other">
+            <label>other</label>:
+            <div class="other">{{contact.value}}</div>
+        {% endfor %}
+    </div>
+</div>
+
+
+{% endblock %}
