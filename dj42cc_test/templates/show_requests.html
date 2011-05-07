@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% block content %}
+<ul>
+{% for log in object_list %}
+<li>{{log.data.path}}</li>
+{% endfor %}
+</ul>
+{% endblock %}
