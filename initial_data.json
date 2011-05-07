@@ -18,6 +18,15 @@
   }
  }, 
  {
+  "pk": 8, 
+  "model": "contenttypes.contenttype", 
+  "fields": {
+   "model": "logentry", 
+   "name": "log entry", 
+   "app_label": "admin"
+  }
+ }, 
+ {
   "pk": 4, 
   "model": "contenttypes.contenttype", 
   "fields": {
@@ -33,6 +42,15 @@
    "model": "permission", 
    "name": "permission", 
    "app_label": "auth"
+  }
+ }, 
+ {
+  "pk": 9, 
+  "model": "contenttypes.contenttype", 
+  "fields": {
+   "model": "person", 
+   "name": "person", 
+   "app_label": "splash"
   }
  }, 
  {
@@ -63,11 +81,69 @@
   }
  }, 
  {
+  "pk": "cef9dfd16d087aed47862bf32f9ee2cd", 
+  "model": "sessions.session", 
+  "fields": {
+   "expire_date": "2011-05-21 05:43:12", 
+   "session_data": "YjM0ZjA5MmM4N2I4NWY4MWZhNTkzYWUzNmRkYjM3ODdkN2Q5OWNjYTqAAn1xAShVEl9hdXRoX3Vz\nZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED\nVQ1fYXV0aF91c2VyX2lkcQRLAXUu\n"
+  }
+ }, 
+ {
   "pk": 1, 
   "model": "sites.site", 
   "fields": {
    "domain": "example.com", 
    "name": "example.com"
+  }
+ }, 
+ {
+  "pk": 1, 
+  "model": "admin.logentry", 
+  "fields": {
+   "action_flag": 1, 
+   "action_time": "2011-05-07 06:25:20", 
+   "object_repr": "Person object", 
+   "object_id": "1", 
+   "change_message": "", 
+   "user": 1, 
+   "content_type": 9
+  }
+ }, 
+ {
+  "pk": 1, 
+  "model": "splash.person", 
+  "fields": {
+   "birth_date": "1988-04-26", 
+   "bio": "Damn lazy loooong python bastard.\r\n\r\nLiving in Odessa, writing damn code.", 
+   "first_name": "Ilya", 
+   "last_name": "Petrov"
+  }
+ }, 
+ {
+  "pk": 22, 
+  "model": "auth.permission", 
+  "fields": {
+   "codename": "add_logentry", 
+   "name": "Can add log entry", 
+   "content_type": 8
+  }
+ }, 
+ {
+  "pk": 23, 
+  "model": "auth.permission", 
+  "fields": {
+   "codename": "change_logentry", 
+   "name": "Can change log entry", 
+   "content_type": 8
+  }
+ }, 
+ {
+  "pk": 24, 
+  "model": "auth.permission", 
+  "fields": {
+   "codename": "delete_logentry", 
+   "name": "Can delete log entry", 
+   "content_type": 8
   }
  }, 
  {
@@ -257,6 +333,33 @@
    "codename": "delete_site", 
    "name": "Can delete site", 
    "content_type": 7
+  }
+ }, 
+ {
+  "pk": 25, 
+  "model": "auth.permission", 
+  "fields": {
+   "codename": "add_person", 
+   "name": "Can add person", 
+   "content_type": 9
+  }
+ }, 
+ {
+  "pk": 26, 
+  "model": "auth.permission", 
+  "fields": {
+   "codename": "change_person", 
+   "name": "Can change person", 
+   "content_type": 9
+  }
+ }, 
+ {
+  "pk": 27, 
+  "model": "auth.permission", 
+  "fields": {
+   "codename": "delete_person", 
+   "name": "Can delete person", 
+   "content_type": 9
   }
  }, 
  {
