@@ -3,7 +3,8 @@
 
 {# TODO: move out #}
 <style>
-    .person { float: left }
+    div { padding-bottom : 10px }
+    .person { float: left; width: 50%}
 </style>
 
 {# use form, maby? #}
@@ -13,14 +14,23 @@
         <div class="last_name">{{person.last_name}}</div>
 
         <div class="birh_date">{{person.birth_date}}</div>
-        <label>bio</label>
+        <label>bio</label>:
         <div class="bio">{{person.bio}}</div>
     </div>
 
     <div class="contacts">
-        errr
-    {% for contact in contacts %}
-    {% endfor %}
+        {% for contact in person.contact_set.all %}
+            <div class="contact contact-{{contact.typ}}">
+                <label>{{contact.typ}}</label>
+                <span class="value">{{contact.value}}</span>
+            </div>
+        {% endfor %}
+
+        {% for contact in person.othercontact_set.all %}
+            <div class="contact contact-other">
+            <label>other</label>:
+            <div class="other">{{contact.value}}</div>
+        {% endfor %}
     </div>
 </div>
 
