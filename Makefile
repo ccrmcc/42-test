@@ -1,2 +1,2 @@
 test:
-	./manage.py test splash
+	python manage.py test splash
