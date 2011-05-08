@@ -1,6 +1,7 @@
 from django.test import TestCase
 from models import Person, Contact, OtherContact
 from uuid import uuid4
+from random import randint
 
 class DbLoadedTest(TestCase):
     def test_person_exists(self):
@@ -69,6 +70,18 @@ class EditDataTest(TestCase):
     FN = 'FN_%s' % str(uuid4())
     LN = 'LN %s' % str(uuid4())
 
+    MAIL = 'me%d@example.com' % randint(1,2**32)
+    JABBER = 'me%d@jabber.org' % randint(1,2**32)
+    SKYPE = 'me%d_2011' % randint(1,2**32)
+    OTHER = ('%s ' % str(uuid4())) * randint(1,10)
+
+    CONTACTS = {
+            'email' : MAIL,
+            'jabber' : JABBER,
+            'skype' : SKYPE,
+            'other' : OTHER,
+    }
+
     @classmethod
     def load_data(cls):
         person = Person.objects.get()
@@ -101,6 +114,18 @@ class EditDataTest(TestCase):
         response = self.client.get('/')
         self.assertContains(response, self.FN)
         self.assertContains(response, self.LN)
+
+    def test_edit_contacts(self):
+        data = self.load_data()
+        data.update(self.CONTACTS)
+
+        response = self.client.post("/contact_edit",data)
+        self.assertEqual(response.status_code, 302) # hmm
+
+        response = self.client.get('/')
+        for value in self.CONTACTS.values():
+            self.assertContains(response, value)
+
 
 
 class ViewFormTest(TestCase):
