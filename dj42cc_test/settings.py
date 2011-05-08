@@ -122,6 +122,7 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
     "dj42cc_test.splash",
     "dj42cc_test.logger",
+    "dj42cc_test.settings_context",
 )
 
 # A sample logging configuration. The only tangible logging
