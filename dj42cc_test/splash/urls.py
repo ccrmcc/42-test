@@ -11,6 +11,7 @@ urlpatterns = patterns(
                 "object_id" : 1,
                 "template_object_name" : "person",
             }
-        )
+        ),
+        url('^contact_edit$', 'edit_index_data'),
 
 )

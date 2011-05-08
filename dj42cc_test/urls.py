@@ -7,6 +7,8 @@ admin.autodiscover()
 urlpatterns = patterns('',
     # Examples:
     # url(r'^$', 'dj42cc_test.views.home', name='home'),
+    (r'^accounts/login/$', 'django.contrib.auth.views.login'),
+
     url(r'^', include('dj42cc_test.splash.urls')),
     url(r'^', include('dj42cc_test.logger.urls')),
     url(r'^settings', include('dj42cc_test.settings_context.urls')),
