@@ -1,5 +1,6 @@
 from django.test import TestCase
 from models import Person, Contact, OtherContact
+from uuid import uuid4
 
 class DbLoadedTest(TestCase):
     def test_person_exists(self):
@@ -63,4 +64,39 @@ class IndexOkTest(TestCase):
 
         response = self.client.get('/')
         self.assertNotContains(response, other.value)
+
+class EditDataTest(TestCase):
+    FN = 'FN_%s' % str(uuid4())
+    LN = 'LN %s' % str(uuid4())
+    def load_data(self):
+        person = Person.objects.get()
+
+        ret = {
+                "first_name" : person.first_name,
+                "last_name" : person.last_name,
+                "bio" : person.bio,
+                "birth_date" : person.birth_date, # hmmm
+        }
+
+        for contact in person.contact_set.all():
+            ret[contact.typ] = contact.value
+
+        other_contact = person.othercontact_set.all().get()
+
+        ret['other'] = other_contact.value
+
+        return ret
+
+    def test_edit_name(self):
+        data = self.load_data()
+
+        data['first_name'] = self.FN
+        data['last_name'] = self.LN
+
+        response = self.client.post("/contact_edit",data)
+        self.assertEqual(response.status_code, 302) # hmm
+
+        response = self.client.get('/')
+        self.assertContains(response, self.FN)
+        self.assertContains(response, self.LN)
 
