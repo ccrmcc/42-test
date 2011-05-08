@@ -122,6 +122,7 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
     "dj42cc_test.splash",
     "dj42cc_test.logger",
+    "dj42cc_test.settings_context",
 )
 
 # A sample logging configuration. The only tangible logging
@@ -146,3 +147,13 @@ LOGGING = {
         },
     }
 }
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.contrib.auth.context_processors.auth',
+    'django.core.context_processors.debug',
+    'django.core.context_processors.i18n',
+    'django.core.context_processors.media',
+    'django.core.context_processors.static',
+    'django.contrib.messages.context_processors.messages',
+    "dj42cc_test.settings_context.context_processors.settings",
+)
