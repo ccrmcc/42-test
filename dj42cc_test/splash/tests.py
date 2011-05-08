@@ -104,6 +104,10 @@ class EditDataTest(TestCase):
 
 
 class ViewFormTest(TestCase):
+    def test_csrf_token(self):
+        response = self.client.get("/contact_edit")
+        self.assertContains(response, 'csrfmiddlewaretoken')
+
     def test_get_form(self):
          response = self.client.get("/contact_edit")
          self.assertEqual(response.status_code, 200)
@@ -111,7 +115,7 @@ class ViewFormTest(TestCase):
          data = EditDataTest.load_data()
 
          #check_keys = data.keys()
-         ckeck_keys = [
+         check_keys = [
                 "first_name",
                 "last_name",
                 "bio",
