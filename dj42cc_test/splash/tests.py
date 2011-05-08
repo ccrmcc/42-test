@@ -149,3 +149,13 @@ class ViewFormTest(TestCase):
 
          for key in check_keys:
              self.assertContains(response, data[key])
+
+
+class IndexEditLinkTest(TestCase):
+    LINK = 'href="/contact_edit"'
+
+    def test_link(self):
+        response = self.client.get("/")
+
+        self.assertContains(response, self.LINK)
+
