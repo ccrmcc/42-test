@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+{% block content %}
+STATIC_ROOT = {{settings.STATIC_ROOT}}
+STATIC_URL = {{settings.STATIC_URL}}
+TIME_ZONE = {{settings.TIME_ZONE}}
+ADMIN_MEDIA_PREFIX = {{settings.ADMIN_MEDIA_PREFIX}}
+{% endblock %}
