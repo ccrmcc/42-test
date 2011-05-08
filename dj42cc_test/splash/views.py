@@ -1,7 +1,9 @@
 from django.shortcuts import redirect, render
 from forms import PersonContactsForm, PersonForm
 from models import Person
+from django.contrib.auth.decorators import login_required
 
+@login_required
 def edit_index_data(request):
     
     person = Person.objects.all().get()
