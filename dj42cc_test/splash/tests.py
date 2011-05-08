@@ -68,7 +68,9 @@ class IndexOkTest(TestCase):
 class EditDataTest(TestCase):
     FN = 'FN_%s' % str(uuid4())
     LN = 'LN %s' % str(uuid4())
-    def load_data(self):
+
+    @classmethod
+    def load_data(cls):
         person = Person.objects.get()
 
         ret = {
@@ -100,3 +102,21 @@ class EditDataTest(TestCase):
         self.assertContains(response, self.FN)
         self.assertContains(response, self.LN)
 
+
+class ViewFormTest(TestCase):
+    def test_get_form(self):
+         response = self.client.get("/contact_edit")
+         self.assertEqual(response.status_code, 200)
+
+         data = EditDataTest.load_data()
+
+         #check_keys = data.keys()
+         ckeck_keys = [
+                "first_name",
+                "last_name",
+                "bio",
+                "birth_date",
+        ]
+
+         for key in check_keys:
+             self.assertContains(response, data[key])
