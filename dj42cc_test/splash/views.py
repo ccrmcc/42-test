@@ -1,5 +1,5 @@
 from django.shortcuts import redirect, render
-from django.http import HttpResponseNotAllowed
+from django.http import HttpResponseNotAllowed, HttpResponse
 from forms import PersonContactsForm, PersonForm
 from models import Person
 from django.contrib.auth.decorators import login_required
@@ -25,7 +25,7 @@ def edit_index_data(request):
 
             return redirect('/')
     else:
-        raise HttpResponseNotAllowed
+        return HttpResponseNotAllowed("Method no allowed")
 
     
     kw = { "form" : form }
