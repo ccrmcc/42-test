@@ -218,3 +218,11 @@ class EditAjaxError(TestCase):
         for key in data:
             err = field_errors.get(key)[0]
             self.assertEqual('This field is required.',err)
+
+class EditHtmlError(TestCase):
+    def test_html_errors(self):
+        self.client.post("/accounts/login/", LOGIN)
+        response = self.client.post("/contact_edit", {})
+
+        data = EditDataTest.load_data()
+        self.assertContains(response, 'This field is required.', len(data))
