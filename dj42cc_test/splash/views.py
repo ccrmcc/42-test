@@ -1,4 +1,5 @@
 from django.shortcuts import redirect, render
+from django.utils import simplejson
 from django.http import HttpResponseNotAllowed, HttpResponse
 from forms import PersonContactsForm, PersonForm
 from models import Person
@@ -32,3 +33,21 @@ def edit_index_data(request):
 
     return render(request, 'edit_person.html',kw)
 
+@login_required
+def edit_index_data_ajax(request):
+    if request.method != 'POST':
+        return HttpResponseNotAllowed("Method not allowed")
+
+    person = Person.objects.get()
+
+    form = PersonContactsForm(request.POST, instance=person)
+
+    if form.is_valid():
+        form.save()
+
+        ret = { "status" : "ok" }
+    else:
+        ret = { "status" : "error" , "fields" : form.errors }
+
+    json = simplejson.dumps(ret)
+    return HttpResponse(json, mimetype='application/json')
