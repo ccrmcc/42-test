@@ -11,11 +11,22 @@
 $(document).ready(
      function() {
         $('.jquery-date').datepicker();
+
+        $('.contact_edit').ajaxForm({
+            beforeSubmit: function() {
+                // $(this) nonworking here
+                $('.contact_edit').find('input').attr("disabled", "disabled");
+                $('.contact_edit').find('textarea').attr("disabled", "disabled");
+            },
+            success: function() {
+                alert("submited"); // wtf? never called
+            },
+        })
     }
 );
 </script>
 
-<form action="/contact_edit" method="POST">
+<form class='contact_edit' action="/contact_edit" method="POST">
 
 {# use form, maby? #}
 <div class="vcard">
