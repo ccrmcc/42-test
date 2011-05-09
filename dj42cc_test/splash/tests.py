@@ -180,7 +180,7 @@ class IndexEditLinkTest(TestCase):
 
 class EditJqueryTest(TestCase):
     DATEPICKER = 'class="jquery-date"'
-    JQUERY = ['jquery.min.js', 'jquery-ui.min.js', 'jquery-ui.css']
+    JQUERY = ['jquery.min.js', 'jquery-ui.min.js', 'jquery-ui.css', 'jquery.form.min.js' ]
 
     def test_classname(self):
 
