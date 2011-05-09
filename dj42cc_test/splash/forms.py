@@ -25,3 +25,9 @@ class PersonContactsForm(PersonForm):
                 for typ in
                 self.CONTACT_TYPES
         ]
+
+    def save(self):
+
+        self.instance.contacts = self.cleaned_data
+
+        super(PersonContactsForm, self).save()

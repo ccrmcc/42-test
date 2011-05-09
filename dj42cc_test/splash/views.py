@@ -1,4 +1,5 @@
 from django.shortcuts import redirect, render
+from django.http import HttpResponseNotAllowed
 from forms import PersonContactsForm, PersonForm
 from models import Person
 from django.contrib.auth.decorators import login_required
@@ -15,20 +16,19 @@ def edit_index_data(request):
 
         form = PersonContactsForm(out_data)
 
-        kw = { "form" : form }
 
-        return render(request, 'edit_person.html',kw)
-
-
-
-    form = PersonContactsForm(request.POST, instance=person)
+    elif request.method == 'POST':
+        form = PersonContactsForm(request.POST, instance=person)
     
-    if form.is_valid():
-        form.save()
+        if form.is_valid():
+            form.save()
 
-        person.contacts = form.cleaned_data # save contacts
+            return redirect('/')
+    else:
+        raise HttpResponseNotAllowed
 
-        return redirect('/')
     
-    assert False, "non implemented yet"
+    kw = { "form" : form }
+
+    return render(request, 'edit_person.html',kw)
 
