@@ -1,4 +1,6 @@
 from django.test import TestCase
+from django.utils import simplejson
+
 from models import Person, Contact, OtherContact
 from uuid import uuid4
 from random import randint
@@ -195,3 +197,24 @@ class EditJqueryTest(TestCase):
 
         for js in self.JQUERY:
             self.assertContains(response, js)
+
+class EditPutTest(TestCase):
+    def test_json_errors(self):
+        self.client.post("/accounts/login/", LOGIN)
+        response = self.client.get("/contact_edit/ajax")
+
+        self.assertEqual(response.status_code, 405)
+
+
+class EditAjaxError(TestCase):
+    def test_json_errors(self):
+        self.client.post("/accounts/login/", LOGIN)
+        response = self.client.post("/contact_edit/ajax", {})
+
+        errors = simplejson.loads(response.content)
+        field_errors = errors['fields']
+        data = EditDataTest.load_data()
+
+        for key in data:
+            err = field_errors.get(key)[0]
+            self.assertEqual('This field is required.',err)
