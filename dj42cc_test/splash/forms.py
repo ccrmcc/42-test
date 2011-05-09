@@ -3,9 +3,14 @@ from django.forms import widgets
 from django import forms
 from models import Person
 
+from .widgets import JqueryDate
+
 class PersonForm(ModelForm):
     class Meta:
         model = Person
+        widgets = {
+                "birth_date" : JqueryDate,
+        }
 
 class PersonContactsForm(PersonForm):
     CONTACT_TYPES = [ 'email', 'skype', 'jabber', 'other' ]
