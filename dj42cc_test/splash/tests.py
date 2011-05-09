@@ -178,3 +178,20 @@ class IndexEditLinkTest(TestCase):
 
         self.assertContains(response, self.LINK)
 
+class EditJqueryTest(TestCase):
+    DATEPICKER = 'class="jquery-date"'
+    JQUERY = ['jquery.min.js', 'jquery-ui.min.js']
+
+    def test_classname(self):
+
+        self.client.post("/accounts/login/", LOGIN)
+
+        response = self.client.get("/contact_edit")
+        self.assertContains(response, self.DATEPICKER)
+
+    def test_jquery(self):
+        self.client.post("/accounts/login/", LOGIN)
+        response = self.client.get("/contact_edit")
+
+        for js in self.JQUERY:
+            self.assertContains(response, js)
