@@ -1,0 +1,7 @@
+div { padding-bottom : 10px }
+.person { float: left; width: 50%}
+
+/* errors */
+input.error { border: 1px solid red }
+ul.errorlist li { color: red }
+
