@@ -180,9 +180,11 @@ class IndexEditLinkTest(TestCase):
 
         self.assertContains(response, self.LINK)
 
+
 class EditJqueryTest(TestCase):
     DATEPICKER = 'class="jquery-date"'
-    JQUERY = ['jquery.min.js', 'jquery-ui.min.js', 'jquery-ui.css', 'jquery.form.min.js' ]
+    JQUERY = ['jquery.min.js', 'jquery-ui.min.js', 'jquery-ui.css',
+            'jquery.form.min.js', ]
 
     def test_classname(self):
 
@@ -197,6 +199,7 @@ class EditJqueryTest(TestCase):
 
         for js in self.JQUERY:
             self.assertContains(response, js)
+
 
 class EditPutTest(TestCase):
     def test_json_errors(self):
@@ -217,7 +220,8 @@ class EditAjaxError(TestCase):
 
         for key in data:
             err = field_errors.get(key)[0]
-            self.assertEqual('This field is required.',err)
+            self.assertEqual('This field is required.', err)
+
 
 class EditHtmlError(TestCase):
     def test_html_errors(self):

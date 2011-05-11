@@ -5,11 +5,12 @@ from models import Person
 
 from .widgets import JqueryDate
 
+
 class PersonForm(ModelForm):
     class Meta:
         model = Person
         widgets = {
-                "birth_date" : JqueryDate,
+                "birth_date": JqueryDate,
         }
 
 
@@ -24,8 +25,7 @@ class PersonContactsForm(PersonForm):
         return [
                 (typ, self[typ])
                 for typ in
-                self.CONTACT_TYPES
-        ]
+                self.CONTACT_TYPES]
 
     def save(self):
 

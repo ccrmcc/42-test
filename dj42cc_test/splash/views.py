@@ -20,7 +20,7 @@ def edit_index_data(request):
 
     elif request.method == 'POST':
         form = PersonContactsForm(request.POST, instance=person)
-    
+
         if form.is_valid():
             form.save()
 
@@ -28,10 +28,10 @@ def edit_index_data(request):
     else:
         return HttpResponseNotAllowed("Method no allowed")
 
-    
-    kw = { "form" : form }
+    kw = {"form": form}
 
-    return render(request, 'edit_person.html',kw)
+    return render(request, 'edit_person.html', kw)
+
 
 @login_required
 def edit_index_data_ajax(request):
@@ -45,9 +45,9 @@ def edit_index_data_ajax(request):
     if form.is_valid():
         form.save()
 
-        ret = { "status" : "ok" }
+        ret = {"status": "ok"}
     else:
-        ret = { "status" : "error" , "fields" : form.errors }
+        ret = {"status": "error", "fields": form.errors}
 
     json = simplejson.dumps(ret)
     return HttpResponse(json, mimetype='application/json')
