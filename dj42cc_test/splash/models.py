@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class Person(models.Model):
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
@@ -37,7 +38,6 @@ class Person(models.Model):
         other.value = value.get('other')
         other.save()
 
-
     contacts = property(get_contacts, set_contacts)
 
 
@@ -47,9 +47,10 @@ class Contact(models.Model):
         ("jabber", "JID"),
         ("email", "E-mail"),
     )
-    typ =  models.CharField(max_length=20, choices=TYP_CHOICES)
+    typ = models.CharField(max_length=20, choices=TYP_CHOICES)
     value = models.CharField(max_length=50)
     person = models.ForeignKey(Person)
+
 
 # FIXME: should this really live in separete model?
 class OtherContact(models.Model):

@@ -6,7 +6,7 @@ urlpatterns = patterns(
         '',
         url('^$', direct_to_template,
             {
-                "template" : "show_settings.html",
-            }
-        )
+                "template": "show_settings.html",
+            },
+        ),
 )

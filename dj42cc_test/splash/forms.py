@@ -12,8 +12,9 @@ class PersonForm(ModelForm):
                 "birth_date" : JqueryDate,
         }
 
+
 class PersonContactsForm(PersonForm):
-    CONTACT_TYPES = [ 'email', 'skype', 'jabber', 'other' ]
+    CONTACT_TYPES = ['email', 'skype', 'jabber', 'other']
     email = forms.EmailField()
     skype = forms.CharField()
     jabber = forms.EmailField()
