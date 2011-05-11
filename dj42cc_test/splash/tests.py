@@ -1,6 +1,7 @@
 from django.test import TestCase
 from models import Person, Contact, OtherContact
 
+
 class DbLoadedTest(TestCase):
     def test_person_exists(self):
         person = Person.objects.get()
@@ -15,6 +16,7 @@ class DbLoadedTest(TestCase):
         other_contacts = OtherContact.objects.all()
 
         self.assertNotEqual(other_contacts.count(), 0)
+
 
 class IndexOkTest(TestCase):
     def test_index_ok(self):
@@ -63,4 +65,3 @@ class IndexOkTest(TestCase):
 
         response = self.client.get('/')
         self.assertNotContains(response, other.value)
-
