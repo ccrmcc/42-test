@@ -13,5 +13,4 @@ urlpatterns = patterns(
             }
         ),
         url('^contact_edit$', 'edit_index_data'),
-
 )

@@ -3,6 +3,7 @@ from models import Person, Contact, OtherContact
 from uuid import uuid4
 from random import randint
 
+
 class DbLoadedTest(TestCase):
     def test_person_exists(self):
         person = Person.objects.get()
@@ -17,6 +18,7 @@ class DbLoadedTest(TestCase):
         other_contacts = OtherContact.objects.all()
 
         self.assertNotEqual(other_contacts.count(), 0)
+
 
 class IndexOkTest(TestCase):
     def test_index_ok(self):
