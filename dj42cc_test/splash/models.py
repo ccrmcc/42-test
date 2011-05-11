@@ -38,8 +38,8 @@ class Person(models.Model):
         other.value = value.get('other')
         other.save()
 
-
     contacts = property(get_contacts, set_contacts)
+
 
 class Contact(models.Model):
     TYP_CHOICES = (

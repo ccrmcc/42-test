@@ -3,12 +3,14 @@ from django.forms import widgets
 from django import forms
 from models import Person
 
+
 class PersonForm(ModelForm):
     class Meta:
         model = Person
 
+
 class PersonContactsForm(PersonForm):
-    CONTACT_TYPES = [ 'email', 'skype', 'jabber', 'other' ]
+    CONTACT_TYPES = ['email', 'skype', 'jabber', 'other']
     email = forms.EmailField()
     skype = forms.CharField()
     jabber = forms.EmailField()
@@ -18,5 +20,4 @@ class PersonContactsForm(PersonForm):
         return [
                 (typ, self[typ])
                 for typ in
-                self.CONTACT_TYPES
-        ]
+                self.CONTACT_TYPES]

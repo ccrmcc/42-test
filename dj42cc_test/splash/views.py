@@ -3,9 +3,10 @@ from forms import PersonContactsForm, PersonForm
 from models import Person
 from django.contrib.auth.decorators import login_required
 
+
 @login_required
 def edit_index_data(request):
-    
+
     person = Person.objects.all().get()
 
     if request.method == 'GET':
@@ -15,20 +16,17 @@ def edit_index_data(request):
 
         form = PersonContactsForm(out_data)
 
-        kw = { "form" : form }
+        kw = {"form": form}
 
-        return render(request, 'edit_person.html',kw)
-
-
+        return render(request, 'edit_person.html', kw)
 
     form = PersonContactsForm(request.POST, instance=person)
-    
+
     if form.is_valid():
         form.save()
 
-        person.contacts = form.cleaned_data # save contacts
+        person.contacts = form.cleaned_data  # save contacts
 
         return redirect('/')
-    
-    assert False, "non implemented yet"
 
+    assert False, "non implemented yet"
