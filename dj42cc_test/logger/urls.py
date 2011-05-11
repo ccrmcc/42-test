@@ -6,9 +6,5 @@ from models import HttpLogEntry
 urlpatterns = patterns(
         '',
         url('^requests$', object_list,
-            {   "template_name": "show_requests.html",
-                "queryset" : HttpLogEntry.objects.all()[:10]
-            }
-        )
-
-)
+            {"template_name": "show_requests.html",
+                "queryset": HttpLogEntry.objects.all()[:10]}))
