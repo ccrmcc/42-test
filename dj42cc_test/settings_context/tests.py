@@ -1,6 +1,7 @@
 from django.test import TestCase
 from django.conf import settings
 
+
 class SettingsPageTest(TestCase):
     KEYS = [
             'STATIC_ROOT',
@@ -8,6 +9,7 @@ class SettingsPageTest(TestCase):
             'TIME_ZONE',
             'ADMIN_MEDIA_PREFIX',
     ]
+
     def test_page_exists(self):
         response = self.client.get('/settings')
         self.assertEqual(response.status_code, 200)
@@ -19,5 +21,3 @@ class SettingsPageTest(TestCase):
         for key in self.KEYS:
             value = fmt % (key, getattr(settings, key))
             self.assertContains(response, value)
-
-
