@@ -2,17 +2,17 @@ test:
 	python dj42cc_test/manage.py test \
 	    splash \
 	    logger \
-	    settings_context \
+	    core \
 
 pep8:
 	pep8 dj42cc_test/splash \
 	     dj42cc_test/logger \
-	     dj42cc_test/settings_context
+	     dj42cc_test/core
 
 coverage:
 	@echo Creating tests coverage report
 	coverage run --source=dj42cc_test dj42cc_test/manage.py test splash logger \
-	    settings_context \
+	    core \
 	&& coverage report
 
 pyflakes:
