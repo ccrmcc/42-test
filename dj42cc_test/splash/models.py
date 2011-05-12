@@ -51,8 +51,14 @@ class Contact(models.Model):
     value = models.CharField(max_length=50)
     person = models.ForeignKey(Person)
 
+    def __unicode__(self):
+        return u'%s contact of %s' % (self.typ, self.person)
+
 
 # FIXME: should this really live in separete model?
 class OtherContact(models.Model):
     person = models.ForeignKey(Person)
     value = models.TextField()
+
+    def __unicode__(self):
+        return u'other contact of %s' % self.person

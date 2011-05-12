@@ -11,7 +11,7 @@ urlpatterns = patterns('',
 
     url(r'^', include('dj42cc_test.splash.urls')),
     url(r'^', include('dj42cc_test.logger.urls')),
-    url(r'^settings', include('dj42cc_test.settings_context.urls')),
+    url(r'^settings', include('dj42cc_test.core.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
