@@ -87,7 +87,7 @@ class EditDataTest(TestCase):
             'email': MAIL,
             'jabber': JABBER,
             'skype': SKYPE,
-            'other': OTHER,
+            'value': OTHER,
     }
 
     @classmethod
@@ -101,12 +101,23 @@ class EditDataTest(TestCase):
                 "birth_date": person.birth_date,  # hmmm
         }
 
-        for contact in person.contact_set.all():
-            ret[contact.typ] = contact.value
+        for x,contact in enumerate(person.contact_set.all()):
+            ret['contact_set-%d-person' % x] = person.pk
+            ret['contact_set-%d-typ' % x] = contact.typ
+            ret['contact_set-%d-value' % x] = contact.value
+            ret['contact_set-%d-id' % x] = contact.id
+
+            fake = cls.CONTACTS[contact.typ]
+            cls.CONTACTS['contact_set-%d-value' % x] = fake
+
+        ret['contact_set-TOTAL_FORMS'] = x+1
+        ret['contact_set-INITIAL_FORMS'] = x+1
+
 
         other_contact = person.othercontact_set.all().get()
 
-        ret['other'] = other_contact.value
+        ret['value'] = other_contact.value
+        ret['person'] = person.pk
 
         return ret
 
