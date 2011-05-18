@@ -17,8 +17,8 @@ def edit_index_data(request):
 
         kw = {
                 "form": form,
-                "contact" : contact_formset,
-                "other" : othercontact_form,
+                "contact": contact_formset,
+                "other": othercontact_form,
         }
 
         return render(request, 'edit_person.html', kw)
@@ -33,7 +33,12 @@ def edit_index_data(request):
         contact_formset.save()
         othercontact_form.save()
 
-
         return redirect('/')
 
-    assert False, "non implemented yet"
+    kw = {
+            "form": form,
+            "contact": contact_formset,
+            "other": othercontact_form,
+    }
+
+    return render(request, 'edit_person.html', kw)
