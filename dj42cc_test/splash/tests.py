@@ -101,7 +101,7 @@ class EditDataTest(TestCase):
                 "birth_date": person.birth_date,  # hmmm
         }
 
-        for x,contact in enumerate(person.contact_set.all()):
+        for x, contact in enumerate(person.contact_set.all()):
             ret['contact_set-%d-person' % x] = person.pk
             ret['contact_set-%d-typ' % x] = contact.typ
             ret['contact_set-%d-value' % x] = contact.value
@@ -110,9 +110,9 @@ class EditDataTest(TestCase):
             fake = cls.CONTACTS[contact.typ]
             cls.CONTACTS['contact_set-%d-value' % x] = fake
 
-        ret['contact_set-TOTAL_FORMS'] = x+1
-        ret['contact_set-INITIAL_FORMS'] = x+1
-
+        MAX = x + 1
+        ret['contact_set-TOTAL_FORMS'] = MAX
+        ret['contact_set-INITIAL_FORMS'] = MAX
 
         other_contact = person.othercontact_set.all().get()
 
