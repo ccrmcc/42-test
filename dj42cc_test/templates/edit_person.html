@@ -14,22 +14,12 @@
     {% csrf_token %}
 
     <div class="person">
-        <div class="first_name">{{form.first_name}}</div>
-        <div class="last_name">{{form.last_name}}</div>
-
-        <div class="birh_date">{{form.birth_date}}</div>
-        <label>bio</label>:
-        <div class="bio">{{form.bio}}</div>
+        {{form}}
     </div>
 
     <div class="contacts">
-        {% for typ,contact in form.contact_fields %}
-            <div class="contact contact-{{typ}}">
-                <label>{{typ}}</label>
-                {{contact}}
-            </div>
-        {% endfor %}
-
+        {{ contact }}
+        {{ other }}
     </div>
 </div>
 <div style="clear:both"/>
