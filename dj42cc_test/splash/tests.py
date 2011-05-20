@@ -252,7 +252,7 @@ class EditHtmlError(TestCase):
                 data.pop(key)
                 fail_keys.append(key)
 
-
         response = self.client.post("/contact_edit", data)
 
-        self.assertContains(response, 'This field is required.', len(fail_keys))
+        errors = len(fail_keys)
+        self.assertContains(response, 'This field is required.', errors)

@@ -45,6 +45,7 @@ def edit_index_data(request):
 
     return render(request, 'edit_person.html', kw)
 
+
 @login_required
 def edit_index_data_ajax(request):
     if request.method != 'POST':
@@ -63,13 +64,13 @@ def edit_index_data_ajax(request):
         contact_formset.save()
         othercontact_form.save()
 
-        ret = { "status" : "ok" }
+        ret = {"status": "ok"}
 
     else:
         err = form.errors
         for form in contact_formset:
             for field in form.errors:
-                err["%s-%s" %(form.prefix,field)] = form.errors[field]
+                err["%s-%s" % (form.prefix, field)] = form.errors[field]
 
         err.update(othercontact_form.errors)
 
