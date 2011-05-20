@@ -21,3 +21,11 @@ class SettingsPageTest(TestCase):
         for key in self.KEYS:
             value = fmt % (key, getattr(settings, key))
             self.assertContains(response, value)
+
+
+class IndexLinkTest(TestCase):
+    LINK = 'href="/settings"'
+
+    def test_link(self):
+        response = self.client.get('/')
+        self.assertContains(response, self.LINK)

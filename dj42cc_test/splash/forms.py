@@ -1,7 +1,9 @@
 from django.forms import ModelForm
 from django.forms import widgets
+from django.forms.models import inlineformset_factory
+
 from django import forms
-from models import Person
+from models import Person, Contact, OtherContact
 
 from .widgets import JqueryDate
 
@@ -14,21 +16,8 @@ class PersonForm(ModelForm):
         }
 
 
-class PersonContactsForm(PersonForm):
-    CONTACT_TYPES = ['email', 'skype', 'jabber', 'other']
-    email = forms.EmailField()
-    skype = forms.CharField()
-    jabber = forms.EmailField()
-    other = forms.CharField(widget=widgets.Textarea)
+class OtherContactForm(ModelForm):
+    class Meta:
+        model = OtherContact
 
-    def contact_fields(self):
-        return [
-                (typ, self[typ])
-                for typ in
-                self.CONTACT_TYPES]
-
-    def save(self):
-
-        self.instance.contacts = self.cleaned_data
-
-        super(PersonContactsForm, self).save()
+ContactFormSet = inlineformset_factory(Person, Contact, extra=0)

@@ -1,7 +1,7 @@
 from django.shortcuts import redirect, render
 from django.utils import simplejson
 from django.http import HttpResponseNotAllowed, HttpResponse
-from forms import PersonContactsForm, PersonForm
+from forms import PersonForm, ContactFormSet, OtherContactForm
 from models import Person
 from django.contrib.auth.decorators import login_required
 
@@ -10,28 +10,40 @@ from django.contrib.auth.decorators import login_required
 def edit_index_data(request):
 
     person = Person.objects.all().get()
+    other = person.othercontact_set.all().get()
 
     if request.method == 'GET':
-        out_data = person.contacts
-        for field in PersonForm.base_fields.keys():
-            out_data[field] = getattr(person, field)
+        form = PersonForm(instance=person)
+        contact_formset = ContactFormSet(instance=person)
+        othercontact_form = OtherContactForm(instance=other)
 
-        form = PersonContactsForm(out_data)
+        kw = {
+                "form": form,
+                "contact": contact_formset,
+                "other": othercontact_form,
+        }
 
-    elif request.method == 'POST':
-        form = PersonContactsForm(request.POST, instance=person)
+        return render(request, 'edit_person.html', kw)
 
-        if form.is_valid():
-            form.save()
+    form = PersonForm(request.POST, instance=person)
+    contact_formset = ContactFormSet(request.POST, instance=person)
+    othercontact_form = OtherContactForm(request.POST, instance=other)
 
-            return redirect('/')
-    else:
-        return HttpResponseNotAllowed("Method no allowed")
+    if form.is_valid() and contact_formset.is_valid() and \
+            othercontact_form.is_valid():
+        form.save()
+        contact_formset.save()
+        othercontact_form.save()
 
-    kw = {"form": form}
+        return redirect('/')
+
+    kw = {
+            "form": form,
+            "contact": contact_formset,
+            "other": othercontact_form,
+    }
 
     return render(request, 'edit_person.html', kw)
-
 
 @login_required
 def edit_index_data_ajax(request):
@@ -40,14 +52,25 @@ def edit_index_data_ajax(request):
 
     person = Person.objects.get()
 
-    form = PersonContactsForm(request.POST, instance=person)
+    form = PersonForm(request.POST, instance=person)
+    contact_formset = ContactFormSet(request.POST, instance=person)
+    othercontact_form = OtherContactForm(request.POST, instance=other)
 
-    if form.is_valid():
+    if form.is_valid() and contact_formset.is_valid() and \
+            othercontact_form.is_valid():
         form.save()
+        contact_formset.save()
+        othercontact_form.save()
 
-        ret = {"status": "ok"}
+        ret = { "status" : "ok" }
+
     else:
-        ret = {"status": "error", "fields": form.errors}
+        err = form.erros
+        err.update(contact_formset.errors)
+        err.update(othercontact_form.errors)
+
+        ret = {"status": "error", "fields": err}
 
     json = simplejson.dumps(ret)
+
     return HttpResponse(json, mimetype='application/json')

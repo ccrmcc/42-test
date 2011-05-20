@@ -1,50 +1,37 @@
 {% extends "base.html" %}
-{% load static %}
-
-{% block extrascripts %}
-<script type="text/javascript" src="{% get_static_prefix %}js/editpage.js"></script>
-{% endblock %}
-
 {% block content %}
 
+{# TODO: move out #}
+<style>
+    div { padding-bottom : 10px }
+    .person { float: left; width: 50%}
+</style>
 
-<form class='contact_edit' action="/contact_edit" method="POST">
+<form action="/contact_edit" method="POST">
 
 {# use form, maby? #}
 <div class="vcard">
     {% csrf_token %}
 
     <div class="person">
-
-        <div class="first_name">
-            {{ form.first_name.errors }}
-            {{form.first_name}}
-        </div>
-        <div class="last_name">
-            {{form.last_name.errors}}
-            {{form.last_name}}
-        </div>
-
-        <div class="birh_date">
-            {{form.birth_date.errors}}
-            {{form.birth_date}}
-        </div>
-        <label>bio</label>:
-        <div class="bio">
-            {{form.bio.errors}}
-            {{form.bio}}
-        </div>
+        {{form.as_p}}
     </div>
 
     <div class="contacts">
-        {% for typ,contact in form.contact_fields %}
-            <div class="contact contact-{{typ}}">
-                <label>{{typ}}</label>
-                {{contact.errors}}
-                {{contact}}
-            </div>
-        {% endfor %}
+        {% for form in contact %}
+            {{form.errors.value}}
+            <label>{{form.typ.value}}:</label>
+            {{form.value}}
+            <br/>
+            <input type="hidden" name="{{form.prefix}}-person" value="{{form.person.value}}"/>
+            <input type="hidden" name="{{form.prefix}}-typ" value="{{form.typ.value}}"/>
+            <input type="hidden" name="{{form.prefix}}-id" value="{{form.id.value}}"/>
 
+        {% endfor %}
+        {{ contact.management_form }}
+
+        <input type="hidden" name="person" value="{{ other.person.value }}"/>
+        <label>other:</label> {{ other.value }}
     </div>
 </div>
 <div style="clear:both"/>
