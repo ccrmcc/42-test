@@ -22,6 +22,7 @@ class SettingsPageTest(TestCase):
             value = fmt % (key, getattr(settings, key))
             self.assertContains(response, value)
 
+
 class IndexLinkTest(TestCase):
     LINK = 'href="/settings"'
 
