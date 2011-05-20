@@ -223,13 +223,21 @@ class EditPutTest(TestCase):
 class EditAjaxError(TestCase):
     def test_json_errors(self):
         self.client.post("/accounts/login/", LOGIN)
-        response = self.client.post("/contact_edit/ajax", {})
+        data = EditDataTest.load_data()
+        fail_keys = []
+        for key in data.keys():
+            if 'value' in key:
+                data.pop(key)
+                fail_keys.append(key)
+
+        response = self.client.post("/contact_edit/ajax", data)
 
         errors = simplejson.loads(response.content)
+
         field_errors = errors['fields']
         data = EditDataTest.load_data()
 
-        for key in data:
+        for key in fail_keys:
             err = field_errors.get(key)[0]
             self.assertEqual('This field is required.', err)
 
@@ -237,7 +245,14 @@ class EditAjaxError(TestCase):
 class EditHtmlError(TestCase):
     def test_html_errors(self):
         self.client.post("/accounts/login/", LOGIN)
-        response = self.client.post("/contact_edit", {})
-
         data = EditDataTest.load_data()
-        self.assertContains(response, 'This field is required.', len(data))
+        fail_keys = []
+        for key in data.keys():
+            if '-value' in key:
+                data.pop(key)
+                fail_keys.append(key)
+
+
+        response = self.client.post("/contact_edit", data)
+
+        self.assertContains(response, 'This field is required.', len(fail_keys))

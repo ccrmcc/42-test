@@ -51,6 +51,7 @@ def edit_index_data_ajax(request):
         return HttpResponseNotAllowed("Method not allowed")
 
     person = Person.objects.get()
+    other = person.othercontact_set.all().get()
 
     form = PersonForm(request.POST, instance=person)
     contact_formset = ContactFormSet(request.POST, instance=person)
@@ -65,8 +66,11 @@ def edit_index_data_ajax(request):
         ret = { "status" : "ok" }
 
     else:
-        err = form.erros
-        err.update(contact_formset.errors)
+        err = form.errors
+        for form in contact_formset:
+            for field in form.errors:
+                err["%s-%s" %(form.prefix,field)] = form.errors[field]
+
         err.update(othercontact_form.errors)
 
         ret = {"status": "error", "fields": err}

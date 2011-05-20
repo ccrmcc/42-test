@@ -1,4 +1,9 @@
 {% extends "base.html" %}
+{% load static %}
+
+{% block extrascripts %}
+<script type="text/javascript" src="{% get_static_prefix %}js/editpage.js"></script>
+{% endblock %}
 {% block content %}
 
 {# TODO: move out #}
@@ -7,7 +12,7 @@
     .person { float: left; width: 50%}
 </style>
 
-<form action="/contact_edit" method="POST">
+<form class="contact_edit" action="/contact_edit" method="POST">
 
 {# use form, maby? #}
 <div class="vcard">
