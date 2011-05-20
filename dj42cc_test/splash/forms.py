@@ -15,4 +15,4 @@ class OtherContactForm(ModelForm):
     class Meta:
         model = OtherContact
 
-ContactFormSet = inlineformset_factory(Person, Contact)
+ContactFormSet = inlineformset_factory(Person, Contact, extra=0)

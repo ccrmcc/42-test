@@ -14,12 +14,24 @@
     {% csrf_token %}
 
     <div class="person">
-        {{form}}
+        {{form.as_p}}
     </div>
 
     <div class="contacts">
-        {{ contact }}
-        {{ other }}
+        {% for form in contact %}
+            {{form.errors.value}}
+            <label>{{form.typ.value}}:</label>
+            {{form.value}}
+            <br/>
+            <input type="hidden" name="{{form.prefix}}-person" value="{{form.person.value}}"/>
+            <input type="hidden" name="{{form.prefix}}-typ" value="{{form.typ.value}}"/>
+            <input type="hidden" name="{{form.prefix}}-id" value="{{form.id.value}}"/>
+
+        {% endfor %}
+        {{ contact.management_form }}
+
+        <input type="hidden" name="person" value="{{ other.person.value }}"/>
+        <label>other:</label> {{ other.value }}
     </div>
 </div>
 <div style="clear:both"/>
