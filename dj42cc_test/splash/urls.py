@@ -13,5 +13,6 @@ urlpatterns = patterns(
             },
         ),
         url('^contact_edit$', 'edit_index_data'),
-        url('^contact_edit/ajax$', 'edit_index_data_ajax'),
+        url('^contact_edit/ajax$', 'edit_index_data_ajax',
+            name='edit_index_data_ajax'),
 )

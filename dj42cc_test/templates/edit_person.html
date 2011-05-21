@@ -3,6 +3,9 @@
 
 {% block extrascripts %}
 <script type="text/javascript" src="{% get_static_prefix %}js/editpage.js"></script>
+<script type="text/javascript" >
+    var EDIT_PERSON_URL = '{% url edit_index_data_ajax %}';
+</script>
 {% endblock %}
 {% block content %}
 

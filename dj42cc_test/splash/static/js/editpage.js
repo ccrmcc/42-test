@@ -53,7 +53,7 @@ var ajaxify_form = function (form) {
                      form_success(form, data, status)
         },
         beforeSubmit: function() {form_beforesubmit(form)},
-        url : "/contact_edit/ajax",
+        url : EDIT_PERSON_URL,
     };
 
     $(form).ajaxForm(options);
