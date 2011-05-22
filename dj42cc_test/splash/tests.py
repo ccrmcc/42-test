@@ -261,6 +261,7 @@ class EditHtmlError(TestCase):
 class AdminLinkTest(TestCase):
     URL = '/admin/splash/person/1/'
     LINK = 'href="%s"' % URL
+
     def test_link(self):
         response = self.client.get("/")
         self.assertContains(response, self.LINK)
