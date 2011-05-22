@@ -1,5 +1,5 @@
 from django.test import TestCase
-from models import HttpLogEntry
+from models import HttpLogEntry, ModelLogEntry
 from uuid import uuid4
 
 
@@ -72,3 +72,63 @@ class LogPathsTest(TestCase):
 
     def tearDown(self):
         HttpLogEntry.objects.all().delete()
+
+class LogDbTest(TestCase):
+    def setUp(self):
+        ModelLogEntry.objects.all().delete()
+
+    def test_create(self,):
+
+        ModelLogEntry.objects.all().delete()
+        http = HttpLogEntry(data="crap")
+        http.save()
+
+        log_all = ModelLogEntry.objects.filter(action='create')
+
+        self.assertEqual(1, log_all.count())
+        log = log_all.get()
+        self.assertEqual(log.action, 'create')
+        self.assertEqual(log.model_name, 'logger.httplogentry')
+        self.assertEqual(log.changed_pk, http.pk)
+
+    def test_edit(self,):
+        ModelLogEntry.objects.all().delete()
+        http = HttpLogEntry(data="crap")
+        http.save()
+
+        http.data = [1,2,3]
+        http.save()
+
+
+        log_all = ModelLogEntry.objects.filter(action='edit')
+
+        self.assertEqual(1, log_all.count())
+
+        log = log_all.get()
+        self.assertEqual(log.action, 'edit')
+        self.assertEqual(log.model_name, 'logger.httplogentry')
+        self.assertEqual(log.changed_pk, http.pk)
+
+    def test_delete(self,):
+        ModelLogEntry.objects.all().delete()
+        http = HttpLogEntry(data="crap")
+        http.save()
+
+        pk = http.pk
+
+        http.delete()
+
+        log_all = ModelLogEntry.objects.all()
+
+        self.assertEqual(2, log_all.count())
+
+
+        log_all = ModelLogEntry.objects.filter(action='delete')
+
+        self.assertEqual(1, log_all.count())
+
+        log = log_all.get()
+        self.assertEqual(log.action, 'delete')
+        self.assertEqual(log.model_name, 'logger.httplogentry')
+        self.assertEqual(log.changed_pk, pk)
+
