@@ -14,7 +14,7 @@ class PersonForm(ModelForm):
         widgets = {
                 "birth_date": JqueryDate,
         }
-        fields = ('last_name', 'first_name', 'bio', 'birth_date',)
+        fields = ('bio', 'birth_date', 'last_name', 'first_name',)
 
 
 class OtherContactForm(ModelForm):
