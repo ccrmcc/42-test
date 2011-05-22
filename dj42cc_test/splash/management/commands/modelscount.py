@@ -3,6 +3,7 @@ from django.conf import settings
 from django.db.models import Model
 from django.utils.importlib import import_module
 
+
 class Command(BaseCommand):
     args = ""
     help = "Counts all registered models"
@@ -11,11 +12,10 @@ class Command(BaseCommand):
         self.stdout.write("%s\n" % msg)
         self.stderr.write("error: %s\n" % msg)
 
-
     def handle(self, *args, **kw):
 
         for app in settings.INSTALLED_APPS:
-            models = import_module("%s.models"%app)
+            models = import_module("%s.models" % app)
 
             self.inspect_models(models)
 
