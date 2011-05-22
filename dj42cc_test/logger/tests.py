@@ -73,6 +73,7 @@ class LogPathsTest(TestCase):
     def tearDown(self):
         HttpLogEntry.objects.all().delete()
 
+
 class LogDbTest(TestCase):
     def setUp(self):
         ModelLogEntry.objects.all().delete()
@@ -96,9 +97,8 @@ class LogDbTest(TestCase):
         http = HttpLogEntry(data="crap")
         http.save()
 
-        http.data = [1,2,3]
+        http.data = [1, 2, 3]
         http.save()
-
 
         log_all = ModelLogEntry.objects.filter(action='edit')
 
@@ -122,7 +122,6 @@ class LogDbTest(TestCase):
 
         self.assertEqual(2, log_all.count())
 
-
         log_all = ModelLogEntry.objects.filter(action='delete')
 
         self.assertEqual(1, log_all.count())
@@ -131,4 +130,3 @@ class LogDbTest(TestCase):
         self.assertEqual(log.action, 'delete')
         self.assertEqual(log.model_name, 'logger.httplogentry')
         self.assertEqual(log.changed_pk, pk)
-
