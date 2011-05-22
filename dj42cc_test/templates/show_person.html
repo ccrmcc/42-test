@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load splash_tags %}
 {% block content %}
 
 {# TODO: move out #}
@@ -9,6 +10,7 @@
 </style>
 
 <a class="loginlink" href="/contact_edit">Login</a>
+{% edit_link person %}
 
 {# use form, maby? #}
 <div class="vcard">
