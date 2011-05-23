@@ -130,3 +130,39 @@ class LogDbTest(TestCase):
         self.assertEqual(log.action, 'delete')
         self.assertEqual(log.model_name, 'logger.httplogentry')
         self.assertEqual(log.changed_pk, pk)
+
+
+class HttpPriorityTest(TestCase):
+    TRIES = 30
+
+    def setUp(self):
+        HttpLogEntry.objects.all().delete()
+
+        for x in range(self.TRIES):
+            self.client.get("/")
+
+    def tearDown(self):
+        HttpLogEntry.objects.all().delete()
+
+    def test_priority(self):
+
+        log = HttpLogEntry.objects.all()[0]
+
+        assert hasattr(log, 'priority')
+
+    def test_edit_priority(self):
+        log = HttpLogEntry.objects.all()[0]
+
+        pri = log.priority or 0  # handle None
+
+        PREFIX = "httplogentry-%d-%s"
+        _PREFIX = "httplogentry-%s-FORMS"
+
+        data = {
+                PREFIX % (0, "id"): log.pk,
+                PREFIX % (0, "priority"): pri + 1,
+                _PREFIX % 'TOTAL': 1,
+                _PREFIX % 'MAX': 1,
+        }
+
+        self.client.post("/reqiests/edit", data)
