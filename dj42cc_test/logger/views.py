@@ -21,9 +21,10 @@ def show_requests(request):
 
 @login_required
 def edit_requests(request):
-    formset = HttpLogEntryFormSet(request.POST)
+    if request.method == 'POST':
+        formset = HttpLogEntryFormSet(request.POST)
 
-    if formset.is_valid():
-        formset.save()
+        if formset.is_valid():
+            formset.save()
 
     return redirect("show_requests")
