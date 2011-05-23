@@ -6,6 +6,7 @@ from django.db.models.signals import post_save, post_delete
 class HttpLogEntry(models.Model):
     data = PickledObjectField()
     add_datetime = models.DateTimeField(auto_now_add=True)
+    priority = models.IntegerField(default=0)
 
 
 class ModelLogEntry(models.Model):
