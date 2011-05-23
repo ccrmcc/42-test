@@ -154,15 +154,21 @@ class HttpPriorityTest(TestCase):
         log = HttpLogEntry.objects.all()[0]
 
         pri = log.priority or 0  # handle None
+        pri += 1
 
         PREFIX = "httplogentry-%d-%s"
         _PREFIX = "httplogentry-%s-FORMS"
 
         data = {
                 PREFIX % (0, "id"): log.pk,
-                PREFIX % (0, "priority"): pri + 1,
+                PREFIX % (0, "priority"): pri,
                 _PREFIX % 'TOTAL': 1,
                 _PREFIX % 'MAX': 1,
         }
 
-        self.client.post("/reqiests/edit", data)
+        response = self.client.post("/reqiests/edit", data)
+        self.assertRedirects(response, "/response")
+
+        edit_log = HttpLogEntry.objects.get(pk=log.pk)
+
+        self.assertEqual(edit_log.priority, pri)
