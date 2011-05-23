@@ -136,12 +136,13 @@ LOGIN = {
         "password": "admin",
 }
 
+
 class HttpPriorityEdtiTest(TestCase):
     def test_admin(self):
         response = self.client.post("/requests/edit", {})
         self.assertRedirects(response, 'accounts/login/?next=/requests/edit')
 
- 
+
 class HttpPriorityTest(TestCase):
     TRIES = 30
 

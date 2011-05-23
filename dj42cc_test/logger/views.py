@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from models import HttpLogEntry
 from forms import HttpLogEntryFormSet
 
+
 def show_requests(request):
 
     object_list = HttpLogEntry.objects.order_by("-priority")
@@ -16,6 +17,7 @@ def show_requests(request):
     }
 
     return render(request, "show_requests.html", kw)
+
 
 @login_required
 def edit_requests(request):
