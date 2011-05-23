@@ -131,7 +131,17 @@ class LogDbTest(TestCase):
         self.assertEqual(log.model_name, 'logger.httplogentry')
         self.assertEqual(log.changed_pk, pk)
 
+LOGIN = {
+        "username": "admin",
+        "password": "admin",
+}
 
+class HttpPriorityEdtiTest(TestCase):
+    def test_admin(self):
+        response = self.client.post("/requests/edit", {})
+        self.assertRedirects(response, 'accounts/login/?next=/requests/edit')
+
+ 
 class HttpPriorityTest(TestCase):
     TRIES = 30
 
@@ -156,18 +166,21 @@ class HttpPriorityTest(TestCase):
         pri = log.priority or 0  # handle None
         pri += 1
 
-        PREFIX = "httplogentry-%d-%s"
-        _PREFIX = "httplogentry-%s-FORMS"
+        PREFIX = "form-%d-%s"
+        _PREFIX = "form-%s_FORMS"
 
         data = {
                 PREFIX % (0, "id"): log.pk,
                 PREFIX % (0, "priority"): pri,
                 _PREFIX % 'TOTAL': 1,
-                _PREFIX % 'MAX': 1,
+                _PREFIX % 'MAX_NUM': 1,
+                _PREFIX % 'INITIAL': 1,
         }
 
-        response = self.client.post("/reqiests/edit", data)
-        self.assertRedirects(response, "/response")
+        self.client.post("/accounts/login/", LOGIN)
+
+        response = self.client.post("/requests/edit", data)
+        self.assertRedirects(response, "/requests")
 
         edit_log = HttpLogEntry.objects.get(pk=log.pk)
 

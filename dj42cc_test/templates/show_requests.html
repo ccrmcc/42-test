@@ -2,13 +2,19 @@
 {% block title %}requests{% endblock %}
 {% block content %}
 <h1>First ten request list</h1>
+<form method="POST" action="{% url edit_requests %}">
+{% csrf_token %}
 <ul>
-{% for log in object_list %}
+{% for log,form in object_form %}
 <li>
 <span class="method">{{log.data.method}}</span>
 <span class="path">{{log.data.path}}</span>
 <span class="code">{{log.data.code}}</span>
+<span class=priority">{{form}}</span>
 </li>
 {% endfor %}
 </ul>
+{{formset.management_form}}
+<input type="submit" />
+</form>
 {% endblock %}
